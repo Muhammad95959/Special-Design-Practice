@@ -1,5 +1,6 @@
 :root {
   --main-color: #03a9f4;
+  --section-padding: 60px;
 }
 * {
   box-sizing: border-box;
@@ -24,6 +25,12 @@ body {
   font-family: "Open Sans", sans-serif;
   font-weight: 500;
 }
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--main-color);
+}
 .container {
   padding-left: 15px;
   padding-right: 15px;
@@ -42,6 +49,9 @@ body {
 }
 a {
   text-decoration: none;
+}
+.c-grey {
+  color: #767676;
 }
 
 /*start landing section*/
@@ -163,6 +173,9 @@ a {
     }
     h1 {
       font-size: 36px;
+      @media (max-width: 768px) {
+        font-size: 28px;
+      }
       span {
         color: var(--main-color);
       }
@@ -171,7 +184,45 @@ a {
       margin-top: 10px;
       font-size: 18px;
       line-height: 1.7;
+      @media (max-width: 768px) {
+        font-size: 16px;
+      }
     }
   }
 }
 /*end landing section*/
+
+/*start about section*/
+#about {
+  .container {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+    display: flex;
+    align-items: center;
+    @media (max-width: 768px) {
+      text-align: center;
+      display: block;
+    }
+    .text {
+      flex: 1;
+      h2 {
+        color: var(--main-color);
+        font-size: 30px;
+      }
+      p {
+        margin-top: 10px;
+        font-size: 17px;
+        line-height: 1.7;
+      }
+    }
+    .image {
+      text-align: center;
+      flex: 1;
+      width: 100%;
+      img {
+        width: 250px;
+      }
+    }
+  }
+}
+/*end about section*/

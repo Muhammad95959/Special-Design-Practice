@@ -346,3 +346,89 @@ a {
   }
 }
 /*end gallery section*/
+
+/*start timeline section*/
+#timeline {
+  background-color: #eee;
+  .container {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    &::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 30px;
+      transform: translateX(-50%);
+      width: 1px;
+      height: calc(100% - var(--section-padding));
+      background-color: var(--main-color);
+    }
+    .year {
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: var(--main-color);
+      font-weight: bold;
+      color: white;
+      font-size: 14px;
+      width: 45px;
+      text-align: center;
+      padding: 2px 0;
+      border-radius: 4px;
+      &:not(:first-of-type) {
+        margin-top: 40px;
+      }
+    }
+    .box {
+      background-color: white;
+      margin-top: 40px;
+      width: calc(50% - 30px);
+      padding: 20px;
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        right: -20px;
+        top: 20px;
+        border-width: 10px;
+        border-style: solid;
+        border-color: transparent transparent transparent white;
+      }
+      &::after {
+        content: "";
+        box-sizing: border-box;
+        position: absolute;
+        right: -40px;
+        top: 20px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: white;
+        border: 3px solid var(--main-color);
+      }
+      &.right {
+        align-self: flex-end;
+        &::before {
+          right: auto;
+          left: -20px;
+          border-color: transparent white transparent transparent;
+        }
+        &::after {
+          right: auto;
+          left: -40px;
+        }
+      }
+      h3 {
+        color: var(--main-color);
+      }
+      p {
+        margin-top: 10px;
+        line-height: 1.7;
+      }
+    }
+  }
+}
+/*end timeline section*/

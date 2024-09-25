@@ -42,7 +42,7 @@ window.onscroll = function () {
 };
 
 // expand the image after clicking it in the gallery section
-document.querySelectorAll("#gallery .images img").forEach(function (e) {
+document.querySelectorAll("#gallery .images .image").forEach(function (e) {
   e.onclick = function () {
     const overlay = document.createElement("div");
     overlay.classList.add("overlay");
@@ -51,10 +51,10 @@ document.querySelectorAll("#gallery .images img").forEach(function (e) {
     box.classList.add("box");
     overlay.appendChild(box);
     const title = document.createElement("h2");
-    title.textContent = e.alt;
+    title.textContent = e.firstChild.alt;
     box.appendChild(title);
     const image = document.createElement("img");
-    image.src = e.src;
+    image.src = e.firstChild.src;
     box.appendChild(image);
     const closeBtn = document.createElement("a");
     closeBtn.classList.add("close-btn");

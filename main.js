@@ -40,3 +40,30 @@ window.onscroll = function () {
       e.style.transform = "translateX(0)";
   });
 };
+
+// expand the image after clicking it in the gallery section
+document.querySelectorAll("#gallery .images img").forEach(function (e) {
+  e.onclick = function () {
+    const overlay = document.createElement("div");
+    overlay.classList.add("overlay");
+    document.querySelector("#gallery").appendChild(overlay);
+    const box = document.createElement("div");
+    box.classList.add("box");
+    overlay.appendChild(box);
+    const title = document.createElement("h2");
+    title.textContent = e.alt;
+    box.appendChild(title);
+    const image = document.createElement("img");
+    image.src = e.src;
+    box.appendChild(image);
+    const closeBtn = document.createElement("a");
+    closeBtn.classList.add("close-btn");
+    closeBtn.textContent = "X";
+    closeBtn.onclick = function () {
+      overlay.style.opacity = 0;
+      setTimeout(() => overlay.remove(), 300);
+    };
+    box.appendChild(closeBtn);
+    setTimeout(() => (overlay.style.opacity = 1), 1);
+  };
+});

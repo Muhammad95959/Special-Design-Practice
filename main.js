@@ -1,5 +1,9 @@
 const menuBtn = document.querySelector(".menu-btn");
 const links = document.querySelector(".links");
+const aside = document.querySelector("aside");
+const navBullets = document.querySelector(".nav-bullets");
+
+let intervalId;
 
 // toggle menu visibility with a fade effect
 menuBtn.onclick = function () {
@@ -67,3 +71,90 @@ document.querySelectorAll("#gallery .images .image").forEach(function (e) {
     setTimeout(() => (overlay.style.opacity = 1), 1);
   };
 });
+
+// toggle side panel on gear icon click
+document.querySelector("aside .icon").onclick = () =>
+  aside.classList.toggle("show");
+
+document.querySelectorAll("aside .colors .box a").forEach(function (e) {
+  e.onclick = function () {
+    handleSelected(e);
+    const mainColor = e.dataset.mainColor;
+    const secColor = e.dataset.secColor;
+    window.localStorage.setItem("mainColor", mainColor);
+    document.documentElement.style.setProperty("--main-color", mainColor);
+    window.localStorage.setItem("secColor", secColor);
+    document.documentElement.style.setProperty("--sec-color", secColor);
+  };
+});
+// restore color settings from local storage
+const savedMainColor = window.localStorage.getItem("mainColor");
+const savedSecColor = window.localStorage.getItem("secColor");
+if (savedMainColor !== null && savedSecColor !== null) {
+  handleSelected(
+    document.querySelector(
+      `aside .colors .box [data-main-color="${savedMainColor}"]`,
+    ),
+  );
+  document.documentElement.style.setProperty("--main-color", savedMainColor);
+  document.documentElement.style.setProperty("--sec-color", savedSecColor);
+}
+
+document.querySelectorAll(".random-bg a").forEach(function (e) {
+  e.onclick = function () {
+    handleSelected(e);
+    if (e.classList.contains("yes")) {
+      startRandomBackgroundInterval();
+      window.localStorage.setItem("randomBg", "yes");
+    } else if (e.classList.contains("no")) {
+      clearInterval(intervalId);
+      window.localStorage.setItem("randomBg", "no");
+    }
+  };
+});
+// restore random background settings from local storage
+if (window.localStorage.randomBg !== "no") {
+  startRandomBackgroundInterval();
+} else handleSelected(document.querySelector(".random-bg .no"));
+
+document.querySelectorAll(".bullets a").forEach(function (e) {
+  e.onclick = function () {
+    handleSelected(e);
+    if (e.classList.contains("yes")) {
+      navBullets.classList.remove("hide");
+      window.localStorage.setItem("bullets", "yes");
+    } else if (e.classList.contains("no")) {
+      navBullets.classList.add("hide");
+      window.localStorage.setItem("bullets", "no");
+    }
+  };
+});
+// restore bullets settings from local storage
+if (window.localStorage.bullets === "no") {
+  handleSelected(document.querySelector(".bullets .no"));
+  navBullets.classList.add("hide");
+}
+
+document.querySelector("aside .reset-btn").onclick = function () {
+  window.localStorage.removeItem("mainColor");
+  window.localStorage.removeItem("randomBg");
+  window.localStorage.removeItem("bullets");
+  window.location.reload();
+};
+
+function handleSelected(e) {
+  [...e.parentNode.children].forEach(function (element) {
+    element.classList.remove("selected");
+  });
+  e.classList.add("selected");
+}
+
+function startRandomBackgroundInterval() {
+  const backgrounds = ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg"];
+  let counter = 1;
+  intervalId = setInterval(function () {
+    document.getElementById("landing").style.backgroundImage =
+      `url("images/${backgrounds[counter % backgrounds.length]}")`;
+    counter++;
+  }, 10000);
+}

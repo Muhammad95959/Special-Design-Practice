@@ -421,6 +421,17 @@ a {
           left: -40px;
         }
       }
+      @media (max-width: 768px) {
+        align-self: center;
+        width: 90%;
+        &.right {
+          align-self: center;
+        }
+        &::before,
+        &::after {
+          display: none;
+        }
+      }
       h3 {
         color: var(--main-color);
       }

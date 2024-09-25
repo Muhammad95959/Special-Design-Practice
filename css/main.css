@@ -664,3 +664,52 @@ footer {
   }
 }
 /*end footer*/
+
+/*start nav-bullets*/
+.nav-bullets {
+  position: fixed;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  gap: 20px;
+  z-index: 1;
+  > a {
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 3px solid var(--main-color);
+    > div {
+      transition: opacity 0.3s;
+      opacity: 0;
+      pointer-events: none;
+      &::before,
+      &::after {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      &::before {
+        content: attr(data-section);
+        right: 35px;
+        color: white;
+        width: 110px;
+        text-align: center;
+        padding: 5px;
+        background-color: var(--main-color);
+      }
+      &::after {
+        content: "";
+        right: 15px;
+        border-width: 10px;
+        border-style: solid;
+        border-color: transparent transparent transparent var(--main-color);
+      }
+    }
+    &:hover > div {
+      opacity: 1;
+    }
+  }
+}
+/*end nav-bullets*/
